@@ -70,6 +70,7 @@ jobs:
             - run: pnpm release:archive:check
             - run: pnpm release:archive
             - run: |
+                  mkdir -p build/wordpress
                   wp core download --path=build/wordpress --version=7.0
                   wp config create --path=build/wordpress --dbname=wordpress_test --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306
                   wp core install --path=build/wordpress --url=http://localhost --title='PNS CI' --admin_user=admin --admin_password=admin --admin_email=admin@example.com --skip-email

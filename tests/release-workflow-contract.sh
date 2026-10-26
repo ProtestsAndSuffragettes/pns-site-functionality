@@ -19,12 +19,23 @@ reject() {
 		exit 1
 	fi
 }
+require_before() {
+	local file=$1 earlier=$2 later=$3
+	local earlier_line later_line
+	earlier_line=$(grep -Fn -- "$earlier" "$file" | head -n 1 | cut -d: -f1)
+	later_line=$(grep -Fn -- "$later" "$file" | head -n 1 | cut -d: -f1)
+	if [ -z "$earlier_line" ] || [ -z "$later_line" ] || [ "$earlier_line" -ge "$later_line" ]; then
+		printf 'Expected workflow preparation before download in %s: %s before %s\n' "$file" "$earlier" "$later" >&2
+		exit 1
+	fi
+}
 
 require "$quality" 'push:'
 require "$quality" '- main'
 require "$quality" 'workflow_dispatch:'
 require "$quality" "github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha"
 require "$quality" 'bash tests/release-workflow-contract.sh'
+require_before "$quality" 'mkdir -p build/wordpress' 'wp core download --path=build/wordpress --version=7.0'
 
 require "$release" 'workflow_run:'
 require "$release" 'workflows: [Quality]'
