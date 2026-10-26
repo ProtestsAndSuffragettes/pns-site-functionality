@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<ruleset name="PNS Site Functionality">
+	<description>Internal P&amp;S WordPress plugin coding standards.</description>
+	<config name="minimum_wp_version" value="7.0"/>
+	<config name="testVersion" value="8.4-8.5"/>
+	<file>.</file>
+	<exclude-pattern>/vendor/</exclude-pattern>
+	<exclude-pattern>/node_modules/</exclude-pattern>
+	<arg value="sp"/>
+	<arg name="basepath" value="./"/>
+	<arg value="ns"/>
+	<arg name="extensions" value="php"/>
+	<arg name="parallel" value="4"/>
+	<rule ref="RANWordPressPlugin"/>
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties><property name="prefixes" type="array"><element value="pns_site_functionality"/><element value="PNS\SiteFunctionality"/></property></properties>
+	</rule>
+	<rule ref="WordPress-Docs"/>
+	<rule ref="Generic.Classes.OpeningBraceSameLine"/>
+	<rule ref="Generic.ControlStructures.InlineControlStructure"/>
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+	<rule ref="Generic.Commenting.Todo"/>
+	<rule ref="Generic.Commenting.Fixme"/>
+	<rule ref="Squiz.ControlStructures.ControlSignature"/>
+</ruleset>

@@ -1,0 +1,69 @@
+{
+	"name": "protestsandsuffragettes/pns-site-functionality",
+	"description": "Internal Protests & Suffragettes site functionality plugin.",
+	"type": "wordpress-plugin",
+	"license": "MIT",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/RocketsAreNostalgic/ran-coding-standards.git"
+		}
+	],
+	"minimum-stability": "stable",
+	"prefer-stable": true,
+	"autoload": {
+		"psr-4": {
+			"PNS\\SiteFunctionality\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"PNS\\SiteFunctionality\\Tests\\": "tests/"
+		}
+	},
+	"require": {
+		"php": ">=8.4 <8.6"
+	},
+	"require-dev": {
+		"10up/wp_mock": "^1.0",
+		"php-stubs/wordpress-stubs": "7.0.*",
+		"phpcompatibility/php-compatibility": "10.0.0-alpha2",
+		"phpcompatibility/phpcompatibility-paragonie": "2.0.0-alpha2",
+		"phpcompatibility/phpcompatibility-wp": "3.0.0-alpha2",
+		"phpstan/phpstan": "^2.1",
+		"phpunit/phpunit": "^9.6",
+		"ran/coding-standards": "^1.0",
+		"szepeviktor/phpstan-wordpress": "^2.0",
+		"wp-phpunit/wp-phpunit": "^6.4",
+		"yoast/phpunit-polyfills": "^2.0"
+	},
+	"scripts": {
+		"check": [
+			"@lint:syntax",
+			"@standards",
+			"@test",
+			"@analyze"
+		],
+		"lint:syntax": "bash -o pipefail -c 'find . -type d \\( -name vendor -o -name node_modules -o -name .git \\) -prune -o -type f -name \"*.php\" -print0 | xargs -0 -n1 php -l'",
+		"standards": "phpcs --standard=.phpcs.xml",
+		"standards:fix": "phpcbf --standard=.phpcs.xml --report=summary",
+		"test": [
+			"@test:unit",
+			"@test:quality-contract",
+			"@test:analysis-contract"
+		],
+		"test:unit": "phpunit --configuration phpunit.xml",
+		"test:quality-contract": "bash tests/php-quality-contract.sh",
+		"test:analysis-contract": "bash tests/php-analysis-contract.sh",
+		"check:coverage": "@php scripts/check-analysis-coverage.php",
+		"analyze": [
+			"@check:coverage",
+			"phpstan analyse --configuration=phpstan.neon --no-progress --memory-limit=1G"
+		]
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

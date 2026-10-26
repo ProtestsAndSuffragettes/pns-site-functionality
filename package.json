@@ -1,0 +1,31 @@
+{
+	"name": "pns-site-functionality",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Internal Protests & Suffragettes site functionality plugin.",
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ProtestsAndSuffragettes/pns-site-functionality.git"
+	},
+	"scripts": {
+		"format": "prettier --write '*.md' '*.{json,yml,yaml}' .release-please-manifest.json '.github/**/*.yml'",
+		"format:check": "prettier --check '*.md' '*.{json,yml,yaml}' .release-please-manifest.json '.github/**/*.yml'",
+		"check": "pnpm format:check",
+		"release:archive": "php scripts/build-release.php",
+		"release:archive:check": "php scripts/build-release.php --check"
+	},
+	"devDependencies": {
+		"@rocketsarenostalgic/quality-config": "github:RocketsAreNostalgic/ran-quality-config#7faebe578c509e9265769314fd41bb1485b868b0",
+		"prettier": "3.9.5"
+	},
+	"engines": {
+		"node": ">=24.21.0 <25",
+		"pnpm": ">=11"
+	},
+	"volta": {
+		"node": "24.21.0"
+	},
+	"packageManager": "pnpm@11.13.1",
+	"prettier": "@rocketsarenostalgic/quality-config/prettier"
+}

@@ -1,0 +1,8 @@
+# Runtime files for the P&S Site Functionality distributable archive.
+# The builder installs the production Composer autoloader into a temporary stage;
+# do not add vendor/ here.
+LICENSE
+pns-site-functionality.php
+src/
+composer.json
+composer.lock
