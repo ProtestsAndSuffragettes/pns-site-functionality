@@ -7,7 +7,7 @@
  * License: MIT
  * Update URI: https://github.com/ProtestsAndSuffragettes/pns-site-functionality
  * x-release-please-start-version
- * Version: 0.1.0
+ * Version: 0.2.0
  * x-release-please-end
  * Requires at least: 7.0
  * Requires PHP: 8.4
