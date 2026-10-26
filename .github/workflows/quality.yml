@@ -85,9 +85,9 @@ jobs:
                   export PNS_ROLE_TEST_URL=http://localhost
                   jq -n --arg root "$PNS_ROLE_TEST_ROOT" --arg site_url "$PNS_ROLE_TEST_URL" --arg db_name wordpress_test \
                     '{root: $root, site_url: $site_url, db_name: $db_name}' > "$PNS_ROLE_TEST_ROOT.pns-role-proof.json"
-                  PNS_ROLE_TEST_PHASE=active wp eval-file "$GITHUB_WORKSPACE/tests/wordpress/draft-editor-proof.php" --path=build/wordpress
+                  PNS_ROLE_TEST_PHASE=active wp eval-file "$GITHUB_WORKSPACE/tests/wordpress/draft-editor-proof.php" --use-include --path=build/wordpress
                   wp plugin deactivate pns-site-functionality --path=build/wordpress
-                  PNS_ROLE_TEST_PHASE=inactive wp eval-file "$GITHUB_WORKSPACE/tests/wordpress/draft-editor-proof.php" --path=build/wordpress
+                  PNS_ROLE_TEST_PHASE=inactive wp eval-file "$GITHUB_WORKSPACE/tests/wordpress/draft-editor-proof.php" --use-include --path=build/wordpress
                   wp plugin activate pns-site-functionality --path=build/wordpress
     quality:
         if: ${{ always() }}

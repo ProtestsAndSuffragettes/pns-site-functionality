@@ -36,6 +36,8 @@ require "$quality" 'workflow_dispatch:'
 require "$quality" "github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha"
 require "$quality" 'bash tests/release-workflow-contract.sh'
 require_before "$quality" 'mkdir -p build/wordpress' 'wp core download --path=build/wordpress --version=7.0'
+require "$quality" 'PNS_ROLE_TEST_PHASE=active wp eval-file "$GITHUB_WORKSPACE/tests/wordpress/draft-editor-proof.php" --use-include --path=build/wordpress'
+require "$quality" 'PNS_ROLE_TEST_PHASE=inactive wp eval-file "$GITHUB_WORKSPACE/tests/wordpress/draft-editor-proof.php" --use-include --path=build/wordpress'
 
 require "$release" 'workflow_run:'
 require "$release" 'workflows: [Quality]'
